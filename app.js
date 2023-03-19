@@ -6,7 +6,8 @@ const app = express();
 app.use(express.json());
 
 //API
-const notesController = require('./notes_backend/controllers/notesController');
+const notesController = require('./controllers/notesController');
+const userController = require("./controllers/userController");
 
 //body-parser
 var bodyParser = require('body-parser');
@@ -31,6 +32,8 @@ app.get ('/notes/:id', notesController.fetchNote)
 app.post('/notes', notesController.createNote)
 app.put('/notes/:id', notesController.updateNote)
 app.delete('/notes/:id', notesController.deleteNote)
+
+app.post('/notes/signup', userController.signup)
 
 // server start
 app.listen(3001, (console.log('server is running on https://localhost:3001')));
