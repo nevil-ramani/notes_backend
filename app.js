@@ -5,6 +5,8 @@ const app = express();
 //configure express app 
 app.use(express.json());
 
+
+
 //API
 const notesController = require('./controllers/notesController');
 const userController = require("./controllers/userController");
@@ -13,6 +15,10 @@ const userController = require("./controllers/userController");
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//cookie-parser
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 //.env
 require('dotenv').config()
@@ -34,6 +40,7 @@ app.put('/notes/:id', notesController.updateNote)
 app.delete('/notes/:id', notesController.deleteNote)
 
 app.post('/notes/signup', userController.signup)
+app.post('/notes/login', userController.login)
 
 // server start
 app.listen(3001, (console.log('server is running on https://localhost:3001')));
