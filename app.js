@@ -5,6 +5,9 @@ const app = express();
 //configure express app 
 app.use(express.json());
 
+//middelware
+const requireAuth = require('./middleware/requirAuth')
+
 
 
 //API
@@ -17,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //cookie-parser
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 //.env
@@ -32,6 +35,9 @@ connectDB();
 var cors = require('cors')
 app.use(cors())
 
+
+
+
 // routing
 app.get ('/notes', notesController.fetchNotes)
 app.get ('/notes/:id', notesController.fetchNote)
@@ -41,6 +47,7 @@ app.delete('/notes/:id', notesController.deleteNote)
 
 app.post('/notes/signup', userController.signup)
 app.post('/notes/login', userController.login)
+app.get ('/notes/checkauth',requireAuth, userController.checkAuth)
 
 // server start
 app.listen(3001, (console.log('server is running on https://localhost:3001')));

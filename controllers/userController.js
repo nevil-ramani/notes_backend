@@ -29,6 +29,7 @@ const signup = async (req, res) => {
 }
 
 
+
 //login
 
 
@@ -47,20 +48,42 @@ const login = async (req, res) => {
     const exp = Date.now() + 1000 * 60 * 60 * 24 * 30;
     var token = jwt.sign({ sub: user._id , exp: exp }, process.env.SECRET);
 
-    res.json({token: token});
+    
 
-    res.cookie('authorization', token ,{
-        expires: new Date(exp),
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-    });
+    // res.cookie('authorization', token ,{
+    //     expires: new Date(exp),
+    //     httpOnly: true,
+    //     sameSite: "lax",
+    //     secure: process.env.NODE_ENV === "production",
+    // });
+
+    // res.cookie( "key", token,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+
+    res.cookie('Authorization', token, {
+        expires  : new Date(Date.now() + 9999999),
+        httpOnly : false
+      });
+      
+      res.status(200).send({ token: token });   //server would hang without this line of code
+
+
 }
+
+
 
 //logout
 
 
+
+// check Authantication
+
+const checkAuth = (req, res) => {
+    console.log(req.user)
+}
+
+
 module.exports = {
     signup:signup,
-    login:login
+    login:login,
+    checkAuth:checkAuth
 }
