@@ -47,7 +47,8 @@ app.delete('/notes/:id', notesController.deleteNote)
 
 app.post('/notes/signup', userController.signup)
 app.post('/notes/login', userController.login)
-app.get ('/notes/checkauth',requireAuth, userController.checkAuth)
+//app.get ('/notes/checkauth', requireAuth, userController.checkAuth) //this is not work
+app.get ('/checkauth',requireAuth, userController.checkAuth)
 
 // server start
 app.listen(3001, (console.log('server is running on https://localhost:3001')));

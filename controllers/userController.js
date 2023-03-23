@@ -25,7 +25,7 @@ const signup = async (req, res) => {
     })
 
     //respond with the new note
-    res.send(signup);
+    res.json(signup);
 }
 
 
@@ -77,9 +77,21 @@ const login = async (req, res) => {
 
 // check Authantication
 
-const checkAuth = (req, res) => {
-    console.log(req.user)
-}
+// const checkAuth = async (req, res) => {
+//     // const user = await req.user
+//     // console.log(user)    
+//     res.status(200).send("hello");  
+// }
+
+function checkAuth(req, res) {
+    try {
+        // console.log(res.user)
+      res.sendStatus(200);
+    } catch (err) {
+      return res.sendStatus(400);
+    }
+  }
+  
 
 
 module.exports = {
