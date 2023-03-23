@@ -77,15 +77,9 @@ const login = async (req, res) => {
 
 // check Authantication
 
-// const checkAuth = async (req, res) => {
-//     // const user = await req.user
-//     // console.log(user)    
-//     res.status(200).send("hello");  
-// }
-
 function checkAuth(req, res) {
     try {
-        // console.log(res.user)
+        console.log(req.user)
       res.sendStatus(200);
     } catch (err) {
       return res.sendStatus(400);
