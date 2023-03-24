@@ -72,6 +72,11 @@ const login = async (req, res) => {
 
 
 //logout
+const logout = (req, res) => {
+
+  res.clearCookie('Authorization');
+  res.sendStatus(200);
+}
 
 
 
@@ -91,5 +96,6 @@ function checkAuth(req, res) {
 module.exports = {
     signup:signup,
     login:login,
-    checkAuth:checkAuth
+    checkAuth:checkAuth,
+    logout:logout
 }
