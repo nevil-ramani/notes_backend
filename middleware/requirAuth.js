@@ -10,6 +10,11 @@ const requireAuth = async (req , res , next) => {
     //decode cookie
     const decoded = jwt.verify(token, process.env.SECRET);
 
+    //check Authorization
+    if(Date.now() > decoded.exp){
+        res.sendStatus(401);
+    }
+
     //find user using decoded sub
     const user = await UserModel.findById(decoded.sub);
 
